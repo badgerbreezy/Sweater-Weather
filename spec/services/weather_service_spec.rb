@@ -6,7 +6,7 @@ describe 'WeatherService' do
       lat: 39.738453,
       lng: -104.984853
     }
-    
+
     response = WeatherService.get_weather_data(latlng)
     expect(response).to be_a(Hash)
 
@@ -17,7 +17,7 @@ describe 'WeatherService' do
     expect(response[:current][:temp]).to be_an(Integer).or be_a(Float)
     expect(response[:current][:feels_like]).to be_a(Float)
     expect(response[:current][:humidity]).to be_an(Integer)
-    expect(response[:current][:uvi]).to be_an(Integer)
+    expect(response[:current][:uvi]).to be_an(Integer).or be_a(Float)
     expect(response[:current][:visibility]).to be_an(Integer)
     expect(response[:current][:weather][0][:description]).to be_a(String)
     expect(response[:current][:weather][0][:icon]).to be_a(String)

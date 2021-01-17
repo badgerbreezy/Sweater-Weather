@@ -15,9 +15,9 @@ describe WeatherHourly, type: :poro do
   it 'exists and has attributes' do
     expect(@weather_hourly).to be_a(WeatherHourly)
     expect(@weather_hourly.time).to eq('21:00:00')
-    expect(@weather_hourly.temperature).to eq(30.91)
-    expect(@weather_hourly.wind_speed).to eq(1.66)
-    expect(@weather_hourly.wind_direction).to eq('SSE')
+    expect(@weather_hourly.temperature).to eq(272.06)
+    expect(@weather_hourly.wind_speed).to eq("1.66 mph")
+    expect(@weather_hourly.wind_direction).to eq('from SSE')
     expect(@weather_hourly.conditions).to eq("overcast clouds")
     expect(@weather_hourly.icon).to eq("04n")
   end

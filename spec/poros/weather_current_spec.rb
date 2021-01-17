@@ -13,7 +13,6 @@ describe WeatherCurrent, type: :poro do
       :visibility=>10000,
       :weather=>[{:description=>"overcast clouds", :icon=>"04n"}]
     }
-
     @weather_current = WeatherCurrent.new(data)
   end
 
@@ -22,8 +21,8 @@ describe WeatherCurrent, type: :poro do
     expect(@weather_current.datetime).to eq('2021-01-17 04:07:15 +0000')
     expect(@weather_current.sunrise).to eq('2021-01-16 02:18:33 +0000')
     expect(@weather_current.sunset).to eq('2021-01-17 12:00:41 +0000')
-    expect(@weather_current.temperature).to eq(30.91)
-    expect(@weather_current.feels_like).to eq(26.9)
+    expect(@weather_current.temperature).to eq(272.06)
+    expect(@weather_current.feels_like).to eq(268.05)
     expect(@weather_current.humidity).to eq(62)
     expect(@weather_current.uvi).to eq(0)
     expect(@weather_current.visibility).to eq(10000)
