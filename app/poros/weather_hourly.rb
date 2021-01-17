@@ -8,8 +8,8 @@ class WeatherHourly
 
   def initialize(data)
     @time = convert_utc_time(data[:dt])
-    @temperature = fahrenheit(data[:temp]).round(2)
-    @wind_speed = data[:wind_speed]
+    @temperature = data[:temp].round(2)
+    @wind_speed = "#{data[:wind_speed]} mph"
     @wind_direction = compass(data[:wind_deg])
     @conditions = data[:weather][0][:description]
     @icon = data[:weather][0][:icon]
@@ -22,7 +22,7 @@ class WeatherHourly
   def compass(deg)
     conversion = ((deg/22.5) + 0.5).to_i
     direction = ["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"]
-    direction[conversion]
+    "from #{direction[conversion]}"
   end
 
   def convert_utc_time(utc)
