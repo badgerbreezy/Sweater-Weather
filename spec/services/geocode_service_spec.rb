@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'GeocodeService' do
   it 'returns data from a specific location', :vcr do
-    response = GeocodeService.new.get_location_data('denver,co')
+    response = GeocodeService.get_location_data('denver,co')
 
     expect(response).to be_a(Hash)
     expect(response[:results]).to be_an(Array)
