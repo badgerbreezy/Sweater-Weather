@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'WeatherService' do
+describe WeatherService do
   it 'returns weather data from lat and lng', :vcr do
     latlng = {
       lat: 39.738453,
@@ -40,6 +40,5 @@ describe 'WeatherService' do
     expect(response[:hourly][0][:wind_deg]).to be_an(Integer).or be_a(Float)
     expect(response[:hourly][0][:weather][0][:description]).to be_a(String)
     expect(response[:hourly][0][:weather][0][:icon]).to be_a(String)
-    # binding.pry
   end
 end

@@ -1,13 +1,12 @@
 class ForecastFacade
   def self.get_forecast(location)
-    results = WeatherService.get_weather_data(geocodes(location))
+    results = forecast_data(location)
     join_forecast(location)
   end
 
   def self.join_forecast(location)
     forecast = {"current_weather": forecast_current(location), "daily_weather": forecast_daily(location), "hourly_weather": forecast_hourly(location)}
   end
-
 
   def self.forecast_data(location)
     coordinates = geocodes(location)

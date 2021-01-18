@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'GeocodeService' do
+describe GeocodeService do
   it 'returns data from a specific location', :vcr do
     response = GeocodeService.get_location_data('denver,co')
 
