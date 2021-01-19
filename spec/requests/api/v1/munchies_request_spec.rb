@@ -1,25 +1,16 @@
 require 'rails_helper'
 
-describe 'As an authorized user' do
-  before :each do
-    @user = User.create(
-      "email": "pitterpatter@gmail.com",
-      "password": "password",
-    )
-  end
-
+describe 'As a user' do
   it 'I can make a road trip that will show open restaurants' do
     request = {
-      "origin": "Denver, CO",
-      "destination": "Aspen, CO",
-      "restaurant": "Chinese",
-      "api_key": @user.api_key
+      "start": "Denver, CO",
+      "end_location": "Aspen, CO",
+      "food": "Chinese",
     }
 
-    post '/api/v1/munchies', params: request
+    get '/api/v1/munchies', params: request
 
     expect(response).to be_successful
-    # binding.pry
     expect(response.status).to eq(200)
     expect(response.content_type).to include("application/json")
     json = JSON.parse(response.body, symbolize_names: true)
