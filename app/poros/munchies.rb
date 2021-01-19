@@ -46,11 +46,14 @@ class Munchies
         open << business
       end
     end
-    restaurant = Hash.new
+    restaurant_hash = Hash.new
     open.each do |business|
-      restaurant[:name] = business[:name]
-      restaurant[:address] = business[:location][:display_address][0]
+      restaurant_hash[:name] = business[:name]
+      restaurant_hash[:address] = business[:location][:display_address]
     end
-    restaurant
+    restaurant = {
+      name: restaurant_hash[:name],
+      address: "#{restaurant_hash[:address][0]}, #{restaurant_hash[:address][1]}"
+    }
   end
 end
