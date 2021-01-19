@@ -2,12 +2,12 @@ class Api::V1::MunchiesController < ApplicationController
   def create
     user = User.find_by(api_key: munchies_params[:api_key])
     if user
-      trip = MapquestService.get_directions_data(munchies_params[:origin], munchies_params[:destination])
-      munchies = yelp_service(munchies_params[:restaurant], munchies_params[:destination])
-      Munchies.new(munchies, trip)
+      trip_data = MapquestService.get_directions_data(munchies_params[:origin], munchies_params[:destination])
+      munchies_data = yelp_service(munchies_params[:restaurant], munchies_params[:destination])
+      munchies = Munchies.new(munchies_data, trip_data)
+      render json: MunchiesSerializer.new(munchies)
 
       # munchies_facade = MunchiesFacade.create_road_trip(trip_params)
-      # render json: MunchiesSerializer.new(munchies_facade)
     else
       render json: payload[:incorrect_api_key], status: :unauthorized
       return

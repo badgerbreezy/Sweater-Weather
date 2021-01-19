@@ -19,6 +19,7 @@ describe 'As an authorized user' do
     post '/api/v1/munchies', params: request
 
     expect(response).to be_successful
+    # binding.pry
     expect(response.status).to eq(200)
     expect(response.content_type).to include("application/json")
     json = JSON.parse(response.body, symbolize_names: true)
@@ -27,7 +28,7 @@ describe 'As an authorized user' do
     expect(json[:data]).to have_key(:id)
     expect(json[:data][:id]).to eq(nil)
     expect(json[:data]).to have_key(:type)
-    expect(json[:data][:type]).to eq("munchie")
+    expect(json[:data][:type]).to eq("munchies")
     expect(json[:data]).to have_key(:attributes)
     expect(json[:data][:attributes]).to have_key(:destination_city)
     expect(json[:data][:attributes][:destination_city]).to be_a(String)
@@ -45,5 +46,6 @@ describe 'As an authorized user' do
     expect(json[:data][:attributes][:restaurant].keys).to eq([:name, :address])
     expect(json[:data][:attributes][:restaurant][:name]).to be_a(String)
     expect(json[:data][:attributes][:restaurant][:address]).to be_a(String)
+    binding.pry
   end
 end
