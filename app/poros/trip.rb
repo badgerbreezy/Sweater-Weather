@@ -13,8 +13,8 @@ class Trip
     @weather_at_eta = eta_weather(trip_data)
   end
 
-  def convert_address(start_city)
-    "#{start_city[:adminArea5].capitalize}, #{start_city[:adminArea3].upcase}"
+  def convert_address(city)
+    "#{city[:adminArea5].capitalize}, #{city[:adminArea3].upcase}"
   end
 
   def time_convert(time)

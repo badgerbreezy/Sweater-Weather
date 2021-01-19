@@ -4,8 +4,7 @@ class Api::V1::MunchiesController < ApplicationController
     if user
       trip = MapquestService.get_directions_data(munchies_params[:origin], munchies_params[:destination])
       munchies = yelp_service(munchies_params[:restaurant], munchies_params[:destination])
-      binding.pry
-      Munchies.new
+      Munchies.new(munchies, trip)
 
       # munchies_facade = MunchiesFacade.create_road_trip(trip_params)
       # render json: MunchiesSerializer.new(munchies_facade)
