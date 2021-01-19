@@ -46,6 +46,5 @@ describe 'As an authorized user' do
     expect(json[:data][:attributes][:restaurant].keys).to eq([:name, :address])
     expect(json[:data][:attributes][:restaurant][:name]).to be_a(String)
     expect(json[:data][:attributes][:restaurant][:address]).to be_a(String)
-    binding.pry
   end
 end

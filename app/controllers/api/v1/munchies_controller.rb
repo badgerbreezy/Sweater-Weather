@@ -3,7 +3,9 @@ class Api::V1::MunchiesController < ApplicationController
     user = User.find_by(api_key: munchies_params[:api_key])
     if user
       trip_data = MapquestService.get_directions_data(munchies_params[:origin], munchies_params[:destination])
-      munchies_data = yelp_service(munchies_params[:restaurant], munchies_params[:destination])
+
+      munchies_data = YelpService.get_restaurant_data(munchies_params[:restaurant], munchies_params[:destination])
+
       munchies = Munchies.new(munchies_data, trip_data)
       render json: MunchiesSerializer.new(munchies)
 
@@ -18,17 +20,6 @@ class Api::V1::MunchiesController < ApplicationController
 
   def munchies_params
     params.permit(:origin, :destination, :restaurant, :api_key)
-  end
-
-  def yelp_service(term, location)
-    conn = Faraday.new(url: 'https://api.yelp.com') do |f|
-      f.headers['Authorization'] = "Bearer #{ENV['YELP_API_KEY']}"
-    end
-    response = conn.get("/v3/businesses/search") do |req|
-      req.params[:term] = term
-      req.params[:location] = location
-    end
-    json = JSON.parse(response.body, symbolize_names: true)
   end
 
   def payload
