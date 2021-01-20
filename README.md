@@ -6,7 +6,7 @@
 ![](https://img.shields.io/badge/figaro-1.2.0-blue)
 ![](https://img.shields.io/badge/faraday-1.3.0-blue)
 ![](https://img.shields.io/badge/fast_jsonapi-nlm-blue)
-![](https://img.shields.io/badge/build-nlm-blue)
+![](https://img.shields.io/badge/tests-pass!-success)
 
 ## Table of Contents
   - [What it does](#what-it-does)
