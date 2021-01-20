@@ -60,7 +60,7 @@
 
 ## API Contract
 
-To see an example response found below you can use [Postman](https://www.postman.com/downloads/):
+To see an example response found below you can use [Postman](https://www.postman.com/downloads/) or another similar API testing suite:
 
 #### Image Background
 
