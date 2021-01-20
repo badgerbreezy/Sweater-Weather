@@ -21,7 +21,6 @@ describe 'As a user when I visit the welcome page' do
     expect(json[:data][:attributes]).to be_a(Hash)
     expect(json[:data][:attributes]).to have_key(:current_weather)
 
-    # current
     expect(json[:data][:attributes][:current_weather]).to be_a(Hash)
     expect(json[:data][:attributes][:current_weather]).to have_key(:datetime)
     expect(json[:data][:attributes][:current_weather][:datetime]).to be_a(String)
@@ -44,7 +43,6 @@ describe 'As a user when I visit the welcome page' do
     expect(json[:data][:attributes][:current_weather]).to have_key(:icon)
     expect(json[:data][:attributes][:current_weather][:icon]).to be_a(String)
 
-    # daily
     expect(json[:data][:attributes][:daily_weather]).to be_an(Array)
     expect(json[:data][:attributes][:daily_weather].length).to eq(5)
     expect(json[:data][:attributes][:daily_weather][0]).to be_a(Hash)
@@ -63,7 +61,6 @@ describe 'As a user when I visit the welcome page' do
     expect(json[:data][:attributes][:daily_weather][0]).to have_key(:icon)
     expect(json[:data][:attributes][:daily_weather][0][:icon]).to be_a(String)
 
-    # hourly
     expect(json[:data][:attributes]).to have_key(:hourly_weather)
     expect(json[:data][:attributes][:hourly_weather]).to be_an(Array)
     expect(json[:data][:attributes][:hourly_weather].length).to eq(8)

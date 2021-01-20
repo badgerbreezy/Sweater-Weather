@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'As a user when I visit the welcome page' do
-  it 'a request retrieves a JSON response of weather data', :vcr do
+  it 'a request retrieves a JSON response of weather data' do
     get '/api/v1/backgrounds?location=denver,co'
 
     expect(response).to be_successful
@@ -29,5 +29,21 @@ describe 'As a user when I visit the welcome page' do
     expect(json[:data][:attributes][:image][:credit]).to be_a(Hash)
     expect(json[:data][:attributes][:image][:credit]).to have_key(:source)
     expect(json[:data][:attributes][:image][:credit][:source]).to be_a(String)
+  end
+
+  it 'an empty request returns an error message' do
+    get '/api/v1/backgrounds?location='
+
+    expect(response).to_not be_successful
+    expect(response.status).to eq(400)
+    expect(response.message).to eq("Bad Request")
+    expect(response.content_type).to eq("application/json")
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(json).to be_a(Hash)
+    expect(json).to have_key(:error)
+    expect(json[:error]).to eq("Location cannot be empty")
+    expect(json).to have_key(:status)
+    expect(json[:status]).to eq("400")
   end
 end
