@@ -66,7 +66,7 @@ RSpec.configure do |config|
     config.hook_into :webmock
     config.filter_sensitive_data('<MAPQUEST_API_KEY>') { ENV['MAPQUEST_API_KEY'] }
     config.filter_sensitive_data('<OPEN_WEATHER_API_KEY>') { ENV['OPEN_WEATHER_API_KEY'] }
-    config.filter_sensitive_data('<PIXABAY_API_KEY>') { ENV['PIXABAY_API_KEY'] }
+    config.filter_sensitive_data('<BING_SEARCH_KEY>') { ENV['BING_SEARCH_KEY'] }
     config.allow_http_connections_when_no_cassette = true
     config.configure_rspec_metadata!
   end
