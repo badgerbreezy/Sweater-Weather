@@ -6,7 +6,7 @@
 ![](https://img.shields.io/badge/figaro-1.2.0-blue)
 ![](https://img.shields.io/badge/faraday-1.3.0-blue)
 ![](https://img.shields.io/badge/fast_jsonapi-nlm-blue)
-<a href="https://codeclimate.com/github/badgerbreezy/Sweater-Weather/maintainability"><img src="https://api.codeclimate.com/v1/badges/3829eb30c02b882982f8/maintainability" /></a>
+[![Maintainability](https://api.codeclimate.com/v1/badges/3829eb30c02b882982f8/maintainability)](https://codeclimate.com/github/badgerbreezy/Sweater-Weather/maintainability)
 ![](https://img.shields.io/badge/tests-pass!-success)
 
 ## Table of Contents
