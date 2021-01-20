@@ -21,7 +21,6 @@ describe 'As a user when I visit the welcome page' do
     expect(json[:data][:attributes]).to be_a(Hash)
     expect(json[:data][:attributes]).to have_key(:current_weather)
 
-    # current
     expect(json[:data][:attributes][:current_weather]).to be_a(Hash)
     expect(json[:data][:attributes][:current_weather]).to have_key(:datetime)
     expect(json[:data][:attributes][:current_weather][:datetime]).to be_a(String)
@@ -44,7 +43,6 @@ describe 'As a user when I visit the welcome page' do
     expect(json[:data][:attributes][:current_weather]).to have_key(:icon)
     expect(json[:data][:attributes][:current_weather][:icon]).to be_a(String)
 
-    # daily
     expect(json[:data][:attributes][:daily_weather]).to be_an(Array)
     expect(json[:data][:attributes][:daily_weather].length).to eq(5)
     expect(json[:data][:attributes][:daily_weather][0]).to be_a(Hash)
@@ -55,15 +53,14 @@ describe 'As a user when I visit the welcome page' do
     expect(json[:data][:attributes][:daily_weather][0]).to have_key(:sunset)
     expect(json[:data][:attributes][:daily_weather][0][:sunset]).to be_a(String)
     expect(json[:data][:attributes][:daily_weather][0]).to have_key(:max_temp)
-    expect(json[:data][:attributes][:daily_weather][0][:max_temp]).to be_a(Float)
+    expect(json[:data][:attributes][:daily_weather][0][:max_temp]).to be_a(Float).or be_an(Integer)
     expect(json[:data][:attributes][:daily_weather][0]).to have_key(:min_temp)
-    expect(json[:data][:attributes][:daily_weather][0][:min_temp]).to be_a(Float)
+    expect(json[:data][:attributes][:daily_weather][0][:min_temp]).to be_a(Float).or be_an(Integer)
     expect(json[:data][:attributes][:daily_weather][0]).to have_key(:conditions)
     expect(json[:data][:attributes][:daily_weather][0][:conditions]).to be_a(String)
     expect(json[:data][:attributes][:daily_weather][0]).to have_key(:icon)
     expect(json[:data][:attributes][:daily_weather][0][:icon]).to be_a(String)
 
-    # hourly
     expect(json[:data][:attributes]).to have_key(:hourly_weather)
     expect(json[:data][:attributes][:hourly_weather]).to be_an(Array)
     expect(json[:data][:attributes][:hourly_weather].length).to eq(8)
@@ -71,7 +68,7 @@ describe 'As a user when I visit the welcome page' do
     expect(json[:data][:attributes][:hourly_weather][0]).to have_key(:time)
     expect(json[:data][:attributes][:hourly_weather][0][:time]).to be_a(String)
     expect(json[:data][:attributes][:hourly_weather][0]).to have_key(:temperature)
-    expect(json[:data][:attributes][:hourly_weather][0][:temperature]).to be_a(Float)
+    expect(json[:data][:attributes][:hourly_weather][0][:temperature]).to be_a(Float).or be_an(Integer)
     expect(json[:data][:attributes][:hourly_weather][0]).to have_key(:wind_speed)
     expect(json[:data][:attributes][:hourly_weather][0][:wind_speed]).to be_a(String)
     expect(json[:data][:attributes][:hourly_weather][0]).to have_key(:wind_direction)

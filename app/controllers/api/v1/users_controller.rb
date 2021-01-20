@@ -4,7 +4,8 @@ class Api::V1::UsersController < ApplicationController
     if user.save
       render json: UsersSerializer.new(user), status: 201
     else
-      render json: user.errors.full_messages[0], status: 401
+      render json: payload(user), status: :unauthorized
+      return
     end
   end
 
@@ -12,5 +13,12 @@ class Api::V1::UsersController < ApplicationController
 
   def user_params
     params.permit(:email, :password, :password_confirmation)
+  end
+
+  def payload(user)
+    {
+      error: user.errors.full_messages[0],
+      status: 401
+    }
   end
 end

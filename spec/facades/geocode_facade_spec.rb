@@ -10,7 +10,6 @@ describe GeocodeFacade, type: :facade do
       expect(geolocation).to have_key(:lng)
       expect(geolocation[:lat]).to eq(39.738453)
       expect(geolocation[:lng]).to eq(-104.984853)
-      # binding.pry
     end
   end
 end

@@ -1,7 +1,7 @@
 class ForecastFacade
   def self.get_forecast(location)
     results = forecast_data(location)
-    join_forecast(location)
+    Forecast.new(join_forecast(location))
   end
 
   def self.join_forecast(location)
@@ -30,6 +30,6 @@ class ForecastFacade
   end
 
   def self.geocodes(location)
-    GeocodeFacade.get_geolocation(location)
+    MapquestService.get_location_data(location)[:results][0][:locations][0][:latLng]
   end
 end

@@ -1,13 +1,26 @@
 require 'rails_helper'
 
 describe 'As a visitor' do
+  before :each do
+    @user = User.create(
+      "email": "canadagooses@gmail.com",
+      "password": "goosesandmeese"
+    )
+    @headers = {
+      'CONTENT-TYPE' => 'application/json',
+      'ACCEPT' => 'application/json'
+    }
+  end
+  
   it 'I can sign up as a user' do
     request = {
       "email": "pitterpatter@gmail.com",
       "password": "password",
       "password_confirmation": "password"
     }
-    post '/api/v1/users', params: request
+
+    post '/api/v1/users', headers: @headers, params: JSON.generate(request)
+
     expect(response).to be_successful
     expect(response.status).to eq(201)
     expect(response.content_type).to include("application/json")
@@ -28,14 +41,87 @@ describe 'As a visitor' do
     expect(json[:data][:attributes]).to_not include(:password_digest)
   end
 
-  it 'I receive a 401 if registration is invalid' do
+  it 'I receive a 401 if email has been taken' do
     request = {
-      "email": "pitterpatter@gmail.com",
+      "email": "canadagooses@gmail.com",
       "password": "password",
       "password_confirmation": "password"
     }
-    post '/api/v1/users', params: request
+
+    post '/api/v1/users', headers: @headers, params: JSON.generate(request)
+
+    expect(response).to_not be_successful
+    expect(response.status).to eq(401)
+    expect(response.message).to eq("Unauthorized")
+    expect(response.content_type).to include("application/json")
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(json).to_not have_key(:data)
+    expect(json).to have_key(:error)
+    expect(json[:error]).to eq("Email has already been taken")
+    expect(json[:status]).to eq(401)
   end
 
-  # passwords don’t match, email has already been taken, missing a field, etc.
+  it 'I receive a 401 if password field is missing' do
+    request = {
+      "email": "canadagooses@gmail.com",
+      "password": "",
+      "password_confirmation": "password"
+    }
+
+    post '/api/v1/users', headers: @headers, params: JSON.generate(request)
+
+    expect(response).to_not be_successful
+    expect(response.status).to eq(401)
+    expect(response.message).to eq("Unauthorized")
+    expect(response.content_type).to include("application/json")
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(json).to_not have_key(:data)
+    expect(json).to have_key(:error)
+    expect(json[:error]).to eq("Password can't be blank")
+    expect(json[:status]).to eq(401)
+  end
+
+  it 'I receive a 401 if email field is missing' do
+    request = {
+      "email": "",
+      "password": "password",
+      "password_confirmation": "password"
+    }
+
+    post '/api/v1/users', headers: @headers, params: JSON.generate(request)
+
+    expect(response).to_not be_successful
+    expect(response.status).to eq(401)
+    expect(response.message).to eq("Unauthorized")
+    expect(response.content_type).to include("application/json")
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(json).to_not have_key(:data)
+    expect(json).to have_key(:error)
+    expect(json[:error]).to eq("Email can't be blank")
+    expect(json[:status]).to eq(401)
+  end
+
+  it 'I receive a 401 if passwords dont match' do
+    request = {
+      "email": "meese@gmail.com",
+      "password": "password",
+      "password_confirmation": "birdword"
+    }
+
+    post '/api/v1/users', headers: @headers, params: JSON.generate(request)
+
+    expect(response).to_not be_successful
+    expect(response.status).to eq(401)
+    expect(response.message).to eq("Unauthorized")
+    expect(response.content_type).to include("application/json")
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(json).to_not have_key(:data)
+    expect(json).to have_key(:error)
+    expect(json[:error]).to eq("Password confirmation doesn't match Password")
+    expect(json[:status]).to eq(401)
+  end
 end
