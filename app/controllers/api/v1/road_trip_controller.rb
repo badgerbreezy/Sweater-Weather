@@ -4,6 +4,9 @@ class Api::V1::RoadTripController < ApplicationController
     if user
       rt_facade = RoadTripFacade.create_road_trip(trip_params)
       render json: RoadTripSerializer.new(rt_facade)
+    elsif trip_params[:api_key].empty?
+      render json: payload[:api_key_missing], status: :unauthorized
+      return
     else
       render json: payload[:incorrect_api_key], status: :unauthorized
       return
@@ -17,9 +20,15 @@ class Api::V1::RoadTripController < ApplicationController
   end
 
   def payload
-    {incorrect_api_key: {
-      error: 'Incorrect API Key',
-      status: 401
-    }}
+    {
+      incorrect_api_key: {
+        error: 'Incorrect API Key',
+        status: 401
+      },
+      api_key_missing: {
+        error: 'API Key is missing',
+        status: 401
+      }
+    }
   end
 end
