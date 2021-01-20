@@ -5,16 +5,19 @@ class Trip
               :travel_time,
               :weather_at_eta
 
-  def initialize(trip_data)
+  def initialize(origin, destination, time, weather)
     @id = nil
-    @start_city = convert_address(trip_data[:route][:locations][0])
-    @end_city = convert_address(trip_data[:route][:locations][1])
-    @travel_time = time_format(trip_data[:route][:formattedTime])
-    @weather_at_eta = eta_weather(trip_data)
+    @start_city = convert_address(origin)
+    @end_city = convert_address(destination)
+    @travel_time = time_format(time)
+    @weather_at_eta = weather
   end
 
-  def convert_address(start_city)
-    "#{start_city[:adminArea5].capitalize}, #{start_city[:adminArea3].upcase}"
+  def convert_address(address)
+    ad_arr = address.gsub(',', ', ')
+    city = ad_arr.split[0..-2].map { |c| c.capitalize }.join(" ")
+    state = ad_arr.split.last.upcase
+    (city + state).gsub(',', ', ')
   end
 
   def time_convert(time)
@@ -25,17 +28,8 @@ class Trip
   end
 
   def time_format(time)
+    return time if time == "Impossible"
     format = time_convert(time)
     "#{format.first} hours, #{format.last} minutes"
-  end
-
-  def eta_weather(trip_data)
-    location = Hash[trip_data[:route][:locations][1][:latLng].sort]
-    hourly_weather = WeatherService.get_weather_data(location)[:hourly]
-    trip_time = time_convert(trip_data[:route][:formattedTime])[0].to_i
-    weather_data = {
-      temperature: hourly_weather[trip_time][:temp],
-      conditions: hourly_weather[trip_time][:weather][0][:description]
-    }
   end
 end

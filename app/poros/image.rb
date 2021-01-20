@@ -12,5 +12,4 @@ class Image
       }
     }
   end
-
 end
