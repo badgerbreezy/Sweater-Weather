@@ -15,6 +15,7 @@
   - [Requirements](#requirements)
   - [How to Setup Sweater Weather](#how-to-setup-sweater-weather)
   - [API Contract](#api-contract)
+  - [Backend Architecture](#backend-architecture)
   - [Testing](#testing)
   - [Learning Goals](#learning-goals)
   - [Contact](#contact)
@@ -111,6 +112,10 @@ Send the following params as a JSON payload in the body - in Postman, under the 
 
 Sample view of an API call in Postman:
 ![Road Trip](https://user-images.githubusercontent.com/67594471/105152199-1b1e6a00-5ac4-11eb-8d1a-c781ebec68ad.png)
+
+## Backend Architecture
+
+![](https://i.imgur.com/CsnOEsO.png)
 
 ## Testing
 
