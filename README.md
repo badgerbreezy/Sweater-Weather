@@ -115,7 +115,9 @@ Sample view of an API call in Postman:
 
 ## Backend Architecture
 
-![](https://i.imgur.com/CsnOEsO.png)
+The *Sweater Weather* backend application receives a request from the frontend in the appropriate controller, which delegates the request to its respective facade. There, each facade calls on data from one or more appropriate services, which consume APIs. With the data in hand, the facade then builds appropriate objects which are serialized back into JSON format in the controller.
+
+![architecture](https://i.imgur.com/CsnOEsO.png)
 
 ## Testing
 
