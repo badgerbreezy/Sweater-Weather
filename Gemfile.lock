@@ -203,7 +203,6 @@ DEPENDENCIES
   rspec-rails (~> 4.0.1)
   shoulda-matchers
   simplecov
-  tzinfo-data
   vcr
   webmock
 
