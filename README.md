@@ -6,6 +6,7 @@
 ![](https://img.shields.io/badge/figaro-1.2.0-blue)
 ![](https://img.shields.io/badge/faraday-1.3.0-blue)
 ![](https://img.shields.io/badge/fast_jsonapi-nlm-blue)
+[![Maintainability](https://api.codeclimate.com/v1/badges/3829eb30c02b882982f8/maintainability)](https://codeclimate.com/github/badgerbreezy/Sweater-Weather/maintainability)
 ![](https://img.shields.io/badge/tests-pass!-success)
 
 ## Table of Contents
@@ -14,6 +15,7 @@
   - [Requirements](#requirements)
   - [How to Setup Sweater Weather](#how-to-setup-sweater-weather)
   - [API Contract](#api-contract)
+  - [Backend Architecture](#backend-architecture)
   - [Testing](#testing)
   - [Learning Goals](#learning-goals)
   - [Contact](#contact)
@@ -110,6 +112,12 @@ Send the following params as a JSON payload in the body - in Postman, under the 
 
 Sample view of an API call in Postman:
 ![Road Trip](https://user-images.githubusercontent.com/67594471/105152199-1b1e6a00-5ac4-11eb-8d1a-c781ebec68ad.png)
+
+## Backend Architecture
+
+The *Sweater Weather* backend application receives a request from the frontend in the appropriate controller, which delegates the request to its respective facade. There, each facade calls on data from one or more appropriate services, which consume APIs. With the data in hand, the facade then builds appropriate objects which are serialized back into JSON format in the controller.
+
+![architecture](https://i.imgur.com/CsnOEsO.png)
 
 ## Testing
 
