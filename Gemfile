@@ -50,3 +50,5 @@ group :test do
   gem 'shoulda-matchers'
   gem 'rake'
 end
+
+gem 'tzinfo-data'
